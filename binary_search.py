@@ -59,5 +59,6 @@ def binary_search(integer, integers):
                 integers = integers[round(middle) + 1:]
             else:
                 integers = integers[:middle - (middle % 1) - 1]
-            
-main()
+
+if __name__ == '__main__':            
+    main()
