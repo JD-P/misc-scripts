@@ -3,6 +3,7 @@
 
 import argparse
 import re
+import math
 
 def main():
     parser = argparse.ArgumentParser()
@@ -35,30 +36,20 @@ def binary_search(integer, integers):
     """Takes a target search integer to pull from an array of given integers. 
     If target integer is not in array returns False."""
     while 1:
-        mid = len(integers) / 2
-        if len(integers) == 1:
-            if integer == integers[0]:
-                return integer
-            else:
-                return False
-        elif isinstance(mid, float):
-            middle = integers[round(mid)]
-            if integer == middle:
-                return integer
-            elif integer > middle:
-                integers = integers[round(mid) + 1:]
-            else:
-                integers = integers[:round(mid) - 1]
-        else: 
-            middle = integers[mid] + .5
-            if integer == integers[middle - (middle % 1)]:
-                return integer
-            elif integer == integers[round(middle)]:
-                return integer
-            elif integer > middle:
-                integers = integers[round(middle) + 1:]
-            else:
-                integers = integers[:middle - (middle % 1) - 1]
+        if len(integers) % 2:
+            mid = (len(integers) - 1) // 2
+        else:
+            mid = int(len(integers) / 2)
+        try:
+            middle = integers[mid]
+        except IndexError:
+            return False
+        if integer == middle:
+            return integer
+        elif integer > middle:
+            integers = integers[mid + 1:]
+        else:
+            integers = integers[:mid]
 
 if __name__ == '__main__':            
     main()
