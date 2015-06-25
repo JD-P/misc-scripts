@@ -27,6 +27,7 @@ def main():
         for int_string in parsed_ints:
             integers.append(int(int_string))
         target = int(arguments.search_target)
+        integers.sort()
         print(binary_search(target, integers))
         return True
             
