@@ -28,8 +28,11 @@ def deploy_blog(blogname):
     subprocess.call(("git", "clone", blogname + ".git"))
     sys.path.append(os.path.abspath(blogname + "/"))
     os.chdir(blogname)
-    import prerender
-    prerender.main()
+    try:
+        import prerender
+        prerender.main()
+    except ImportError:
+        pass
     subprocess.call(("jekyll", "build", "--source", ".", 
                     "-d", "~/" + blogname + "-staging"))
     os.chdir(os.path.expanduser("~"))
