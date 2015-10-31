@@ -26,9 +26,9 @@ def deploy_blog(blogname):
     """Deploy a jekyll blog stored in a git repository."""
     subprocess.call(("rm", "-rf", blogname))
     subprocess.call(("git", "clone", blogname + ".git"))
-    sys.path.append(blogname + "/")
-    import prerender
+    sys.path.append(os.path.abspath(blogname + "/"))
     os.chdir(blogname)
+    import prerender
     prerender.main()
     subprocess.call(("jekyll", "build", "--source", ".", 
                     "-d", "~/" + blogname + "-staging"))
